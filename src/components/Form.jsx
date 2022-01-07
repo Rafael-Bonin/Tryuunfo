@@ -36,7 +36,7 @@ export default class Form extends React.Component {
             name=""
             data-testid="description-input"
             cols="30"
-            rows="10"
+            rows="3"
           />
         </label>
         <label htmlFor="attribute1">
