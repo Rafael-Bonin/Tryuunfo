@@ -16,13 +16,53 @@ class App extends React.Component {
       cardTrunfo: '',
       hasTrunfo: false,
       isSaveButtonDisabled: true,
+      deck: [],
     };
     this.onInputChange = this.onInputChange.bind(this);
     this.enableDisable = this.enableDisable.bind(this);
+    this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
+  }
+
+  onSaveButtonClick(event) {
+    // 1 - faz com que o botao nao execute o comportamento padrao
+    event.preventDefault();
+    // 2 - recupera todos os states necessarios
+    const {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo,
+    } = this.state;
+    // 3 - cria um objeto com a informacao atual de todos os states
+    const newCard = {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo };
+      // 4 - adiciona o novo card ao state 'deck' e reseta os outros
+    this.setState((fore) => ({
+      deck: [...fore.deck, newCard],
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: 0,
+      cardAttr2: 0,
+      cardAttr3: 0,
+      cardImage: '',
+      cardRare: '',
+      cardTrunfo: '',
+    }));
   }
 
   onInputChange({ target }) {
-    this.setState({ [target.name]: target.value }, this.enableDisable);
+    this.setState({ [target.name]: target.value }, this.enableDisable); // o segundo parametro do setState e uma callback que tambem altera state e utiliza dos resultados da primeira.
   }
 
   enableDisable() {
@@ -74,6 +114,7 @@ class App extends React.Component {
       <div>
         <h1>Tryunfo</h1>
         <Form
+          onSaveButtonClick={ this.onSaveButtonClick }
           enableDisable={ this.enableDisable }
           isSaveButtonDisabled={ isSaveButtonDisabled }
           hasTrunfo={ hasTrunfo }
