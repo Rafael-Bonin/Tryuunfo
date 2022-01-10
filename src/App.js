@@ -112,6 +112,7 @@ class App extends React.Component {
       cardTrunfo,
       hasTrunfo,
       isSaveButtonDisabled,
+      deck,
     } = this.state;
     return (
       <div>
@@ -144,6 +145,23 @@ class App extends React.Component {
           onInputChange={ this.onInputChange }
           cardDescription={ cardDescription }
         />
+        <ul>
+          {deck.map((a) => (
+            <li key={ a.cardName }>
+              <Card
+                cardTrunfo={ a.cardTrunfo }
+                cardRare={ a.cardRare }
+                cardImage={ a.cardImage }
+                cardAttr3={ a.cardAttr3 }
+                cardAttr2={ a.cardAttr2 }
+                cardAttr1={ a.cardAttr1 }
+                cardName={ a.cardName }
+                onInputChange={ this.onInputChange }
+                cardDescription={ a.cardDescription }
+              />
+            </li>
+          ))}
+        </ul>
       </div>
     );
   }
