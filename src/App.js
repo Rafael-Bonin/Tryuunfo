@@ -13,7 +13,7 @@ class App extends React.Component {
       cardAttr3: '',
       cardImage: '',
       cardRare: '',
-      cardTrunfo: '',
+      cardTrunfo: false,
       hasTrunfo: false,
       isSaveButtonDisabled: true,
       deck: [],
@@ -58,11 +58,14 @@ class App extends React.Component {
       cardImage: '',
       cardRare: '',
       cardTrunfo: '',
+      hasTrunfo: cardTrunfo, // requisito 7 utiliza a informacao de quando voce cria uma carta super trunfo pra saber se existe ou nao um super trunfo no baralho
     }));
   }
 
   onInputChange({ target }) {
-    this.setState({ [target.name]: target.value }, this.enableDisable); // o segundo parametro do setState e uma callback que tambem altera state e utiliza dos resultados da primeira.
+    /** ajudado por Gerson Henrique */
+    const value = target.type === 'checkbox' ? target.checked : target.value; // checkbox nao entende o atributo 'value' entao foi necessario definir o value.
+    this.setState({ [target.name]: value }, this.enableDisable); // o segundo parametro do setState e uma callback que tambem altera state e utiliza dos resultados da primeira.
   }
 
   enableDisable() {
